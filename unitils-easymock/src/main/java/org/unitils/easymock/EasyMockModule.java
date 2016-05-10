@@ -37,6 +37,8 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
+import org.easymock.IArgumentMatcher;
+import org.easymock.internal.LastControl;
 import org.easymock.internal.MocksControl;
 import org.easymock.internal.ReplayState;
 import org.unitils.core.Module;
@@ -349,6 +351,18 @@ public class EasyMockModule implements Module {
         public void afterTestMethod(Object testObject, Method testMethod, Throwable throwable) {
             if (autoVerifyAfterTestEnabled && throwable == null) {
                 verify();
+            }
+            testMatchersEmpty();
+        }
+
+        @SuppressWarnings({ "static-method", "javadoc" })
+        protected void testMatchersEmpty()
+        {
+            List<IArgumentMatcher> matchers = LastControl.pullMatchers();
+            if (matchers != null && !matchers.isEmpty())
+            {
+                throw new AssertionError("Matchers should be empty after method, but wasn't.\n"
+                      + "This means that matchers (EasyMock.eq, EasyMock.capture, etc.) were used after all mocks has been replayed, which is erroneous.");
             }
         }
     }
