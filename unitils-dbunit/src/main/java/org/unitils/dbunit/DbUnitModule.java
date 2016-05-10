@@ -29,6 +29,7 @@ import static org.unitils.util.PropertyUtils.getInstance;
 import static org.unitils.util.ReflectionUtils.createInstanceOfType;
 import static org.unitils.util.ReflectionUtils.getClassWithName;
 
+import javax.sql.DataSource;
 import java.io.File;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -38,8 +39,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-
-import javax.sql.DataSource;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
@@ -425,11 +424,16 @@ public class DbUnitModule implements Module {
      * @return The actual data set, not null
      */
     protected IDataSet getActualDataSet(String schemaName) {
+        DbUnitDatabaseConnection connection = getDbUnitDatabaseConnection(schemaName);
         try {
-            return getDbUnitDatabaseConnection(schemaName).createDataSet();
+            return connection.createDataSet();
 
         } catch (Exception e) {
             throw new UnitilsException("Unable to get actual data set for schema " + schemaName, e);
+        }
+        finally
+        {
+            closeJdbcConnection();
         }
     }
 
@@ -582,12 +586,21 @@ public class DbUnitModule implements Module {
      * Closes (i.e. return to the pool) the JDBC Connection that is currently in use by the DbUnitDatabaseConnection
      */
     protected void closeJdbcConnection() {
-        try {
-            for (DbUnitDatabaseConnection dbUnitDatabaseConnection : dbUnitDatabaseConnections.values()) {
+        SQLException lastError = null;
+        for (DbUnitDatabaseConnection dbUnitDatabaseConnection : dbUnitDatabaseConnections.values())
+        {
+            try
+            {
                 dbUnitDatabaseConnection.closeJdbcConnection();
             }
-        } catch (SQLException e) {
-            throw new UnitilsException("Error while closing connection.", e);
+            catch (SQLException e)
+            {
+                lastError = e;
+            }
+        }
+        if (lastError != null)
+        {
+            throw new UnitilsException("Error while closing connection", lastError);
         }
     }
 
