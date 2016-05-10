@@ -70,14 +70,10 @@
     </properties>
 
     <!-- Environment Settings -->
-    <issueManagement>
-        <system>jira</system>
-        <url>http://jira.unitils.org/browse/UNI</url>
-    </issueManagement>
     <scm>
-        <connection>scm:svn:https://svn.code.sf.net/p/unitils/code/branches/3.4</connection>
-        <developerConnection>scm:svn:https://svn.code.sf.net/p/unitils/code/branches/3.4</developerConnection>
-        <url>https://svn.code.sf.net/p/unitils/code/branches/3.4</url>
+        <url>https://github.com/Silvermedia/unitils</url>
+        <connection>scm:git:git://github.com/Silvermedia/unitils.git</connection>
+        <developerConnection>scm:git:git://github.com/Silvermedia/unitils.git</developerConnection>
     </scm>
     <mailingLists>
         <mailingList>
@@ -126,28 +122,6 @@
                         <descriptor>tools/maven/assembly-unitils-with-dependencies.xml</descriptor>
                     </descriptors>
                 </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-release-plugin</artifactId>
-                <configuration>
-                    <goals>deploy package assembly:assembly javadoc:aggregate</goals>
-                    <tagBase>https://svn.code.sf.net/p/unitils/code/tags/releases/</tagBase>
-                    <mavenExecutorId>forked-path</mavenExecutorId>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <version>1.4</version>
-                <executions>
-                    <execution>
-                        <id>sign-artifacts</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
