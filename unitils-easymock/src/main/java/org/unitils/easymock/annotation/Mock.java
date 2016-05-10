@@ -15,12 +15,17 @@
  */
 package org.unitils.easymock.annotation;
 
-import org.unitils.easymock.util.*;
-
 import static java.lang.annotation.ElementType.FIELD;
-import java.lang.annotation.Retention;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
+import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
+
+import org.unitils.easymock.util.Calls;
+import org.unitils.easymock.util.Dates;
+import org.unitils.easymock.util.Defaults;
+import org.unitils.easymock.util.InvocationOrder;
+import org.unitils.easymock.util.Order;
 
 /**
  * Annotation indicating that a lenient mock object (see {@link org.unitils.easymock.util.LenientMocksControl} should be created
@@ -33,6 +38,13 @@ import java.lang.annotation.Target;
 @Retention(RUNTIME)
 public @interface Mock {
 
+
+    /**
+     * Determines name of the mock
+     *
+     * @return mock name
+     */
+    String name() default "";
 
     /**
      * Determines whether the order of method calls on the mock object should be checked.

@@ -78,7 +78,7 @@ public class EasyMockModule implements Module {
 
     /* Property key for configuring whether verify() is automatically called on every mock object after each test method execution */
     public static final String PROPKEY_AUTO_VERIFY_AFTER_TEST_ENABLED = "EasyMockModule.autoVerifyAfterTest.enabled";
-
+    private static final String NO_MOCK_NAME = "";
     /* All created mocks controls */
     private List<MocksControl> mocksControls;
 
@@ -128,11 +128,13 @@ public class EasyMockModule implements Module {
      *
      * @param <T>             the type of the mock
      * @param mockType        the class type for the mock, not null
+     * @param mockName        the name of the mock, nullable
      * @param invocationOrder the order setting, not null
      * @param calls           the calls setting, not null
      * @return a mock for the given class or interface, not null
      */
-    public <T> T createRegularMock(Class<T> mockType, InvocationOrder invocationOrder, Calls calls) {
+    public <T> T createRegularMock(Class<T> mockType, String mockName, InvocationOrder invocationOrder, Calls calls)
+    {
         // Get anotation arguments and replace default values if needed
         invocationOrder = getEnumValueReplaceDefault(RegularMock.class, "invocationOrder", invocationOrder,
                 defaultAnnotationPropertyValues);
@@ -150,7 +152,7 @@ public class EasyMockModule implements Module {
             mocksControl.checkOrder(true);
         }
         mocksControls.add(mocksControl);
-        return mocksControl.createMock(mockType);
+        return mocksControl.createMock(mockName, mockType);
     }
 
 
@@ -166,6 +168,7 @@ public class EasyMockModule implements Module {
      *
      * @param <T>             the type of the mock
      * @param mockType        the type of the mock, not null
+     * @param mockName        the name of the mock, nullable
      * @param invocationOrder the order setting, not null
      * @param calls           the calls setting, not null
      * @param order           todo
@@ -173,7 +176,9 @@ public class EasyMockModule implements Module {
      * @param defaults        todo
      * @return a mockcontrol for the given class or interface, not null
      */
-    public <T> T createMock(Class<T> mockType, InvocationOrder invocationOrder, Calls calls, Order order, Dates dates, Defaults defaults) {
+    public <T> T createMock(Class<T> mockType, String mockName, InvocationOrder invocationOrder, Calls calls,
+          Order order, Dates dates, Defaults defaults)
+    {
         // Get anotation arguments and replace default values if needed
         invocationOrder = getEnumValueReplaceDefault(Mock.class, "invocationOrder", invocationOrder, defaultAnnotationPropertyValues);
         calls = getEnumValueReplaceDefault(Mock.class, "calls", calls, defaultAnnotationPropertyValues);
@@ -204,7 +209,7 @@ public class EasyMockModule implements Module {
             mocksControl.checkOrder(true);
         }
         mocksControls.add(mocksControl);
-        return mocksControl.createMock(mockType);
+        return mocksControl.createMock(mockName, mockType);
     }
 
 
@@ -262,7 +267,11 @@ public class EasyMockModule implements Module {
             Class<?> mockType = mockField.getType();
 
             RegularMock regularMockAnnotation = mockField.getAnnotation(RegularMock.class);
-            Object mockObject = createRegularMock(mockType, regularMockAnnotation.invocationOrder(), regularMockAnnotation.calls());
+            String mockName = NO_MOCK_NAME.equals(regularMockAnnotation.name()) ?
+                  mockField.getName() :
+                  regularMockAnnotation.name();
+            Object mockObject = createRegularMock(mockType, mockName, regularMockAnnotation.invocationOrder(),
+                  regularMockAnnotation.calls());
             setFieldValue(testObject, mockField, mockObject);
 
             callAfterCreateMockMethods(testObject, mockObject, mockField.getName(), mockType);
@@ -278,7 +287,9 @@ public class EasyMockModule implements Module {
             Class<?> mockType = mockField.getType();
 
             Mock mockAnnotation = mockField.getAnnotation(Mock.class);
-            Object mockObject = createMock(mockType, mockAnnotation.invocationOrder(), mockAnnotation.calls(), mockAnnotation.order(), mockAnnotation.dates(), mockAnnotation.defaults());
+            String mockName = NO_MOCK_NAME.equals(mockAnnotation.name()) ? mockField.getName() : mockAnnotation.name();
+            Object mockObject = createMock(mockType, mockName, mockAnnotation.invocationOrder(), mockAnnotation.calls(),
+                  mockAnnotation.order(), mockAnnotation.dates(), mockAnnotation.defaults());
             setFieldValue(testObject, mockField, mockObject);
 
             callAfterCreateMockMethods(testObject, mockObject, mockField.getName(), mockType);

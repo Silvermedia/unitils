@@ -87,6 +87,41 @@ public class EasyMockUnitils {
         return createRegularMock(mockType, InvocationOrder.DEFAULT, Calls.DEFAULT);
     }
 
+    /**
+     * Creates a regular EasyMock mock object of the given type with given name.
+     * <p/>
+     * Same as {@link #createRegularMock(Class, String, InvocationOrder, Calls)} with a default invocation order
+     * and default calls value. These defaults can be set in the unitils configuration.
+     * <p/>
+     * An instance of the mock control is stored, so that it can be set to the replay/verify state when
+     * {@link #replay()} or {@link #verify()} is called.
+     *
+     * @param <T>      the type of the mock
+     * @param mockType the type of the mock, not null
+     * @param mockName the name of the mock
+     * @return a mock for the given class or interface, not null
+     */
+    public static <T> T createRegularMock(Class<T> mockType, String mockName)
+    {
+        return createRegularMock(mockType, mockName, InvocationOrder.DEFAULT, Calls.DEFAULT);
+    }
+
+
+    /**
+     * Creates a regular EasyMock mock object of the given type.
+     * <p/>
+     * An instance of the mock control is stored, so that it can be set to the replay/verify state when
+     * {@link #replay()} or {@link #verify()} is called.
+     *
+     * @param <T>             the type of the mock
+     * @param mockType        the class type for the mock
+     * @param invocationOrder the order setting, not null
+     * @param calls           the calls setting, not null
+     * @return a mock for the given class or interface, not null
+     */
+    public static <T> T createRegularMock(Class<T> mockType, InvocationOrder invocationOrder, Calls calls) {
+        return createRegularMock(mockType, null, invocationOrder, calls);
+    }
 
     /**
      * Creates a regular EasyMock mock object of the given type.
@@ -96,14 +131,16 @@ public class EasyMockUnitils {
      *
      * @param <T>             the type of the mock
      * @param mockType        the class type for the mock, not null
+     * @param mockName        the name for the mock, not null
      * @param invocationOrder the order setting, not null
      * @param calls           the calls setting, not null
      * @return a mock for the given class or interface, not null
      */
-    public static <T> T createRegularMock(Class<T> mockType, InvocationOrder invocationOrder, Calls calls) {
-        return getEasyMockModule().createRegularMock(mockType, invocationOrder, calls);
+    public static <T> T createRegularMock(Class<T> mockType, String mockName, InvocationOrder invocationOrder,
+          Calls calls)
+    {
+        return getEasyMockModule().createRegularMock(mockType, mockName, invocationOrder, calls);
     }
-
 
     /**
      * Creates a lenient mock object of the given type. The {@link org.unitils.easymock.util.LenientMocksControl} is used
@@ -121,7 +158,30 @@ public class EasyMockUnitils {
      * @return a mock for the given class or interface, not null
      */
     public static <T> T createMock(Class<T> mockType) {
-        return createMock(mockType, InvocationOrder.DEFAULT, Calls.DEFAULT, Order.DEFAULT, Dates.DEFAULT, Defaults.DEFAULT);
+        return createMock(mockType, null, InvocationOrder.DEFAULT, Calls.DEFAULT, Order.DEFAULT, Dates.DEFAULT,
+              Defaults.DEFAULT);
+    }
+
+    /**
+     * Creates a lenient mock object of the given type. The {@link org.unitils.easymock.util.LenientMocksControl} is used
+     * for creating the mock.
+     * <p/>
+     * Same as {@link #createMock(Class, InvocationOrder, Calls, Order, Dates, Defaults)} with a default invocation order,
+     * default calls, default order, default dates and default defaults value. These defaults can be set in the
+     * unitils configuration.
+     * <p/>
+     * An instance of the mock control is stored, so that it can be set to the replay/verify state when
+     * {@link #replay()} or {@link #verify()} is called.
+     *
+     * @param <T>      the type of the mock
+     * @param mockType the type of the mock, not null
+     * @param mockName the name of the mock
+     * @return a mock for the given class or interface, not null
+     */
+    public static <T> T createMock(Class<T> mockType, String mockName)
+    {
+        return createMock(mockType, mockName, InvocationOrder.DEFAULT, Calls.DEFAULT, Order.DEFAULT, Dates.DEFAULT,
+              Defaults.DEFAULT);
     }
 
     /**
@@ -145,7 +205,34 @@ public class EasyMockUnitils {
      * @return a mock for the given class or interface, not null
      */
     public static <T> T createMock(Class<T> mockType, InvocationOrder invocationOrder, Calls calls, Order order, Dates dates, Defaults defaults) {
-        return getEasyMockModule().createMock(mockType, invocationOrder, calls, order, dates, defaults);
+        return createMock(mockType, null, invocationOrder, calls, order, dates, defaults);
+    }
+
+    /**
+     * Creates a lenient mock object of the given type. The {@link org.unitils.easymock.util.LenientMocksControl} is used
+     * for creating the mock.
+     * <p/>
+     * Same as {@link #createMock(Class, InvocationOrder, Calls, Order, Dates, Defaults)} with a default invocation order,
+     * default calls, default order, default dates and default defaults value. These defaults can be set in the
+     * unitils configuration.
+     * <p/>
+     * An instance of the mock control is stored, so that it can be set to the replay/verify state when
+     * {@link #replay()} or {@link #verify()} is called.
+     *
+     * @param <T>             the type of the mock
+     * @param mockType        the type of the mock, not null
+     * @param mockName        the name of the mock
+     * @param invocationOrder the invocation order setting, not null
+     * @param calls           the calls setting, not null
+     * @param order           the order setting, not null
+     * @param dates           the dates setting, not null
+     * @param defaults        the defaults setting, not null
+     * @return a mock for the given class or interface, not null
+     */
+    public static <T> T createMock(Class<T> mockType, String mockName, InvocationOrder invocationOrder, Calls calls,
+          Order order, Dates dates, Defaults defaults)
+    {
+        return getEasyMockModule().createMock(mockType, mockName, invocationOrder, calls, order, dates, defaults);
     }
 
     /**
