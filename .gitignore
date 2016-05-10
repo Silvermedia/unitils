@@ -1,0 +1,14 @@
+syntax: glob
+*.ear
+*.jar
+*.war
+.classpath
+.metadata
+.project
+.springBeans
+.checkstyle
+.settings/*
+MANIFEST.MF
+target/
+workspace/*
+rebel.xml
