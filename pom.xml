@@ -72,8 +72,8 @@
     <!-- Environment Settings -->
     <scm>
         <url>https://github.com/Silvermedia/unitils</url>
-        <connection>scm:git:git://github.com/Silvermedia/unitils.git</connection>
-        <developerConnection>scm:git:git://github.com/Silvermedia/unitils.git</developerConnection>
+        <connection>scm:git:git@github.com:Silvermedia/unitils.git</connection>
+        <developerConnection>scm:git:git@github.com:Silvermedia/unitils.git</developerConnection>
     </scm>
     <mailingLists>
         <mailingList>
