@@ -17,9 +17,8 @@ package org.unitils.easymock.util;
 
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
-import static org.easymock.MockType.DEFAULT;
-import static org.easymock.classextension.EasyMock.replay;
-import static org.easymock.classextension.EasyMock.verify;
+import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 import static org.unitils.easymock.EasyMockUnitils.refEq;
@@ -49,7 +48,7 @@ public class LenientMocksControlTest {
      */
     @Before
     public void setUp() throws Exception {
-        lenientMocksControl = new LenientMocksControl(DEFAULT, IGNORE_DEFAULTS);
+        lenientMocksControl = new LenientMocksControl(IGNORE_DEFAULTS);
     }
 
 
@@ -203,10 +202,6 @@ public class LenientMocksControlTest {
      */
     private static class MockedClass {
 
-        public enum TestEnum {
-            TEST1, TEST2
-        }
-
         public void someBehavior() {
         }
 
@@ -216,6 +211,11 @@ public class LenientMocksControlTest {
 
         public String someBehavior(TestEnum testEnum) {
             return null;
+        }
+
+        public enum TestEnum
+        {
+            TEST1, TEST2
         }
     }
 

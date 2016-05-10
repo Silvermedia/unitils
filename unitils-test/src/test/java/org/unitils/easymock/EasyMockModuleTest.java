@@ -15,17 +15,17 @@
  */
 package org.unitils.easymock;
 
-import org.easymock.classextension.EasyMock;
+import static org.junit.Assert.assertNotNull;
+
+import java.util.List;
+import java.util.Properties;
+
+import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
 import org.unitils.UnitilsJUnit4;
 import org.unitils.core.ConfigurationLoader;
 import org.unitils.easymock.annotation.Mock;
-
-import java.util.List;
-import java.util.Properties;
-
-import static org.junit.Assert.assertNotNull;
 
 /**
  * Test class for the creating mocks using the {@link EasyMockModule}

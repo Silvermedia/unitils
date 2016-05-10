@@ -15,15 +15,14 @@
  */
 package org.unitils.database;
 
+import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
-import static org.easymock.classextension.EasyMock.createMock;
-import static org.easymock.classextension.EasyMock.replay;
-import static org.easymock.classextension.EasyMock.reset;
-
-import java.sql.Connection;
-import java.util.Properties;
+import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.reset;
 
 import javax.sql.DataSource;
+import java.sql.Connection;
+import java.util.Properties;
 
 import org.junit.Before;
 import org.unitils.core.Unitils;
@@ -73,6 +72,25 @@ abstract public class DatabaseModuleTransactionalTestBase {
         replay(mockDataSource);
     }
 
+    /**
+     * Utility method to retrieve the database module instance.
+     *
+     * @return The database module, not null
+     */
+    protected DatabaseModule getDatabaseModule()
+    {
+        return Unitils.getInstance().getModulesRepository().getModuleOfType(DatabaseModule.class);
+    }
+
+    /**
+     * Utility method to retrieve the spring module instance.
+     *
+     * @return The spring module, not null
+     */
+    protected SpringModule getSpringModule()
+    {
+        return Unitils.getInstance().getModulesRepository().getModuleOfType(SpringModule.class);
+    }
 
     /**
      * Mock DataSourceFactory, that returns the static mockDataSource
@@ -91,34 +109,14 @@ abstract public class DatabaseModuleTransactionalTestBase {
          */
         public void init(DatabaseConfiguration arg0) {
             // TODO Auto-generated method stub
-            
+
         }
 
 		public void init(Properties configuration, String databaseName) {
 			// TODO Auto-generated method stub
-			
-		}
 
-    }
+      }
 
-
-    /**
-     * Utility method to retrieve the database module instance.
-     *
-     * @return The database module, not null
-     */
-    protected DatabaseModule getDatabaseModule() {
-        return Unitils.getInstance().getModulesRepository().getModuleOfType(DatabaseModule.class);
-    }
-
-
-    /**
-     * Utility method to retrieve the spring module instance.
-     *
-     * @return The spring module, not null
-     */
-    protected SpringModule getSpringModule() {
-        return Unitils.getInstance().getModulesRepository().getModuleOfType(SpringModule.class);
     }
 
 }

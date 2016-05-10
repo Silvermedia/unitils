@@ -224,6 +224,12 @@ public class LenientMocksControl extends MocksControl {
         }
 
         @Override
+        public void andVoid()
+        {
+            recordState.andVoid();
+        }
+
+        @Override
         public void asStub() {
             recordState.asStub();
         }
