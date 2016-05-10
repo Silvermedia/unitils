@@ -69,6 +69,22 @@ public class EasyMockUnitils {
         return object;
     }
 
+    /**
+     * Creates a regular EasyMock mock object of the given type.
+     * <p/>
+     * Same as {@link #createRegularMock(Class, InvocationOrder, Calls)} with a default invocation order
+     * and default calls value. These defaults can be set in the unitils configuration.
+     * <p/>
+     * An instance of the mock control is stored, so that it can be set to the replay/verify state when
+     * {@link #replay()} or {@link #verify()} is called.
+     *
+     * @param <T>      the type of the mock
+     * @param mockType the type of the mock, not null
+     * @return a mock for the given class or interface, not null
+     */
+    public static <T> T mock(Class<T> mockType) {
+        return createRegularMock(mockType);
+    }
 
     /**
      * Creates a regular EasyMock mock object of the given type.
@@ -85,6 +101,25 @@ public class EasyMockUnitils {
      */
     public static <T> T createRegularMock(Class<T> mockType) {
         return createRegularMock(mockType, InvocationOrder.DEFAULT, Calls.DEFAULT);
+    }
+
+    /**
+     * Creates a regular EasyMock mock object of the given type with given name.
+     * <p/>
+     * Same as {@link #createRegularMock(Class, String, InvocationOrder, Calls)} with a default invocation order
+     * and default calls value. These defaults can be set in the unitils configuration.
+     * <p/>
+     * An instance of the mock control is stored, so that it can be set to the replay/verify state when
+     * {@link #replay()} or {@link #verify()} is called.
+     *
+     * @param <T>      the type of the mock
+     * @param mockType the type of the mock, not null
+     * @param mockName the name of the mock
+     * @return a mock for the given class or interface, not null
+     */
+    public static <T> T mock(Class<T> mockType, String mockName)
+    {
+        return createRegularMock(mockType, mockName);
     }
 
     /**
