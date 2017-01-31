@@ -27,7 +27,7 @@
 
     <groupId>org.unitils</groupId>
     <artifactId>unitils</artifactId>
-    <version>3.4.7-silvermedia</version>
+    <version>3.4.8-silvermedia-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
