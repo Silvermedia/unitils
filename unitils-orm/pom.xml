@@ -22,7 +22,7 @@
     <parent>
         <groupId>org.unitils</groupId>
         <artifactId>unitils</artifactId>
-        <version>3.4.4-silvermedia-SNAPSHOT</version>
+        <version>3.4.7-silvermedia-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>unitils-orm</artifactId>
@@ -55,17 +55,12 @@
             <artifactId>spring-orm</artifactId>
             <version>${spring.version}</version>
         </dependency>
-        <dependency>
-            <groupId>javax.persistence</groupId>
-            <artifactId>persistence-api</artifactId>
-            <version>1.0</version>
-        </dependency>
 
         <!-- Optional dependencies -->
         <dependency>
             <groupId>org.hibernate</groupId>
-            <artifactId>hibernate</artifactId>
-            <version>3.2.5.ga</version>
+            <artifactId>hibernate-core</artifactId>
+            <version>3.6.10.Final</version>
             <optional>true</optional>
             <exclusions>
                 <exclusion>
@@ -77,8 +72,14 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <version>3.3.1.ga</version>
+            <version>3.6.10.Final</version>
             <optional>true</optional>
+        </dependency>
+        <dependency>
+          <groupId>org.hibernate.javax.persistence</groupId>
+          <artifactId>hibernate-jpa-2.0-api</artifactId>
+          <version>1.0.1.Final</version>
+          <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>concurrent</groupId>

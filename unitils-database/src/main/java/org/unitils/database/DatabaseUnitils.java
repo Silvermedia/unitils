@@ -193,6 +193,14 @@ public class DatabaseUnitils {
     public static void updateSequences(String databaseName) {
         getDatabaseModule().getWrapper(databaseName).updateSequences();
     }
+    
+    /**
+     * Sets all the sequences to the lowest acceptable value.
+     * This can be defined with the property "sequenceUpdater.sequencevalue.lowestacceptable".
+     */
+    public static void restartSequences(String databaseName) {
+        getDatabaseModule().getWrapper(databaseName).restartSequences();
+    }
 
 
     /**

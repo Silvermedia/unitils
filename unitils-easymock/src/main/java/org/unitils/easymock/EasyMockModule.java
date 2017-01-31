@@ -323,6 +323,10 @@ public class EasyMockModule implements Module {
             }
         }
     }
+    
+    public void addMocksControlToList(MocksControl control) {
+        mocksControls.add(control);
+    }
 
 
     /**
