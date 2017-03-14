@@ -317,6 +317,20 @@ public class Unitils {
         }
 
         @Override
+        public void afterTestClass(Class<?> testClass)
+        {
+            TestContext testContext = getTestContext();
+            testContext.setTestClass(testClass);
+            testContext.setTestObject(null);
+            testContext.setTestMethod(null);
+
+            List<Module> modules = modulesRepository.getModules();
+            for (Module module : modules) {
+                modulesRepository.getTestListener(module).afterTestClass(testClass);
+            }
+        }
+
+        @Override
         public boolean shouldInvokeTestMethod(Object testObject, Method testMethod) {
             List<Module> modules = modulesRepository.getModules();
             for (Module module : modules) {

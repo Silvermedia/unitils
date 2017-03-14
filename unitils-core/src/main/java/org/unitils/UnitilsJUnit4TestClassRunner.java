@@ -15,16 +15,20 @@
  */
 package org.unitils;
 
-import org.junit.internal.runners.*;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
+import org.junit.internal.runners.ClassRoadie;
+import org.junit.internal.runners.InitializationError;
+import org.junit.internal.runners.JUnit4ClassRunner;
+import org.junit.internal.runners.MethodRoadie;
+import org.junit.internal.runners.TestMethod;
 import org.junit.runner.Description;
 import org.junit.runner.notification.Failure;
+import org.junit.runner.notification.RunListener;
 import org.junit.runner.notification.RunNotifier;
 import org.unitils.core.TestListener;
 import org.unitils.core.Unitils;
-
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import org.junit.runner.notification.RunListener;
 import org.unitils.core.UnitilsException;
 
 /**
@@ -68,6 +72,7 @@ public class UnitilsJUnit4TestClassRunner extends JUnit4ClassRunner implements T
         } catch (Throwable t) {
             notifier.fireTestFailure(new Failure(getDescription(), t));
         }
+        getTestListener().afterTestClass(getTestClass().getJavaClass());
     }
 
 

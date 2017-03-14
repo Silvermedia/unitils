@@ -9,6 +9,7 @@ syntax: glob
 .checkstyle
 .settings/*
 MANIFEST.MF
-target/
+**/target/
 workspace/*
-rebel.xml
+**/rebel.xml
+*.iml

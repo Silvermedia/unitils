@@ -52,17 +52,18 @@ import java.lang.reflect.Method;
  */
 public abstract class TestListener {
 
-	
+
 	/**
 	 * Invoked before the generic class setup (e.g. @BeforeClass) is performed.
-	 * 
+	 *
 	 * @param testClass The class whose test methods are about to be executed, not null
 	 */
-	public void beforeTestClass(Class<?> testClass) {
+	public void beforeTestClass(Class<?> testClass)
+   {
 		// empty
 	}
-	
-    
+
+
     /**
      * Invoked before any of the test in a test class are run.
      * This can be overridden to for example add test-class initialization.
@@ -123,18 +124,26 @@ public abstract class TestListener {
     public void afterTestTearDown(Object testObject, Method testMethod) {
         // empty
     }
-    
-    
+
+   /**
+    * Invoked after test class procesing is finished
+    * @param testClass
+    */
+    public void afterTestClass(Class<?> testClass){
+       //empty
+    }
+
+
     /**
      * Method to test whether this method should be executed or not. This goes further than @Ignore, we
      * query the various listeners so they can veto the execution at this time.
-     * 
+     *
      * @param testObject The test instance, not null
      * @param testMethod The test method, not null
      * @return boolean indicating whether the method should be executed or not.
      */
     public boolean shouldInvokeTestMethod(Object testObject, Method testMethod) {
         return true; // per default, execute all
-    }        
+    }
 
 }
