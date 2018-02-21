@@ -15,11 +15,13 @@
  */
 package org.unitils.orm.hibernate.util;
 
+import javax.sql.DataSource;
+
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.orm.hibernate3.LocalSessionFactoryBean;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.unitils.core.Unitils;
 import org.unitils.core.UnitilsException;
 import org.unitils.database.DatabaseModule;
@@ -27,8 +29,6 @@ import org.unitils.orm.common.util.ConfiguredOrmPersistenceUnit;
 import org.unitils.orm.common.util.OrmConfig;
 import org.unitils.orm.common.util.OrmPersistenceUnitLoader;
 import org.unitils.orm.hibernate.HibernateModule;
-
-import javax.sql.DataSource;
 
 
 //todo javadoc
@@ -45,7 +45,7 @@ public class HibernateSessionFactoryLoader implements OrmPersistenceUnitLoader<S
 
     public ConfiguredOrmPersistenceUnit<SessionFactory, Configuration> getConfiguredOrmPersistenceUnit(Object testObject, OrmConfig entityManagerConfig) {
         LocalSessionFactoryBean factoryBean = createSessionFactoryBean(testObject, entityManagerConfig);
-        SessionFactory entityManagerFactory = (SessionFactory) factoryBean.getObject();
+        SessionFactory entityManagerFactory = factoryBean.getObject();
         Configuration hibernateConfiguration = factoryBean.getConfiguration();
         return new ConfiguredOrmPersistenceUnit<SessionFactory, Configuration>(entityManagerFactory, hibernateConfiguration);
     }
@@ -55,7 +55,7 @@ public class HibernateSessionFactoryLoader implements OrmPersistenceUnitLoader<S
         // A custom subclass of spring's LocalSessionFactoryBean is used, to enable calling a custom config method
         UnitilsLocalSessionFactoryBean factoryBean = new UnitilsLocalSessionFactoryBean();
         factoryBean.setDataSource(getDataSource());
-        factoryBean.setConfigurationClass(getConfigurationObjectClass());
+        //factoryBean.setConfigurationClass(getConfigurationObjectClass());
         Resource[] hibernateConfigFiles = new Resource[entityManagerConfig.getConfigFiles().size()];
         int index = 0;
         for (String configFileName : entityManagerConfig.getConfigFiles()) {

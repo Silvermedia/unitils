@@ -15,16 +15,16 @@
  */
 package org.unitils.orm.hibernate.util;
 
+import java.util.Collection;
+
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import org.springframework.orm.hibernate3.LocalSessionFactoryBean;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.unitils.core.Unitils;
 import org.unitils.orm.common.spring.OrmSpringSupport;
 import org.unitils.orm.common.util.ConfiguredOrmPersistenceUnit;
 import org.unitils.orm.hibernate.HibernateModule;
 import org.unitils.spring.SpringModule;
-
-import java.util.Collection;
 
 /**
  * A support class containing Hibernate and {@link HibernateModule} related actions for the {@link SpringModule}.
@@ -48,7 +48,7 @@ public class HibernateSpringSupport implements OrmSpringSupport<SessionFactory, 
     // todo javadoc
     public ConfiguredOrmPersistenceUnit<SessionFactory, Configuration> getConfiguredPersistenceUnit(Object testObject) {
         LocalSessionFactoryBean factoryBean = getSessionFactoryBean(testObject);
-        SessionFactory entityManagerFactory = (SessionFactory) factoryBean.getObject();
+        SessionFactory entityManagerFactory = factoryBean.getObject();
         Configuration hibernateConfiguration = factoryBean.getConfiguration();
 
         return new ConfiguredOrmPersistenceUnit<SessionFactory, Configuration>(entityManagerFactory, hibernateConfiguration);

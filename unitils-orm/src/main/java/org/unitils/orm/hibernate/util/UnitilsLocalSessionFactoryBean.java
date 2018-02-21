@@ -15,16 +15,12 @@
  */
 package org.unitils.orm.hibernate.util;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import org.hibernate.HibernateException;
-import org.hibernate.cfg.Configuration;
-import org.springframework.orm.hibernate3.LocalSessionFactoryBean;
-import org.unitils.core.UnitilsException;
-import org.unitils.util.ReflectionUtils;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 
-public class UnitilsLocalSessionFactoryBean extends LocalSessionFactoryBean {
+public class UnitilsLocalSessionFactoryBean extends LocalSessionFactoryBean
+{
 
 	private Object testObject;
 	
@@ -38,16 +34,15 @@ public class UnitilsLocalSessionFactoryBean extends LocalSessionFactoryBean {
 		this.customConfigMethod = customConfigMethod;
 	}
 
-	@Override
-	protected void postProcessConfiguration(Configuration config) throws HibernateException {
-		if (customConfigMethod != null) {
-			try {
-				ReflectionUtils.invokeMethod(testObject, customConfigMethod, config);
-			} catch (InvocationTargetException e) {
-				throw new UnitilsException("Error while invoking custom config method", e.getCause());
-			}
-		}
-	}
-	
-	
+
+	// @Override
+	// protected void postProcessConfiguration(Configuration config) throws HibernateException {
+	// 	if (customConfigMethod != null) {
+	// 		try {
+	// 			ReflectionUtils.invokeMethod(testObject, customConfigMethod, config);
+	// 		} catch (InvocationTargetException e) {
+	// 			throw new UnitilsException("Error while invoking custom config method", e.getCause());
+	// 		}
+	// 	}
+	// }
 }
