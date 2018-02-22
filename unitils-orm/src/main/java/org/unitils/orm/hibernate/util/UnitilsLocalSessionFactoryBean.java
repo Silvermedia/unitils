@@ -22,27 +22,15 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 public class UnitilsLocalSessionFactoryBean extends LocalSessionFactoryBean
 {
 
-	private Object testObject;
-	
-	private Method customConfigMethod;
+   private Object testObject;
 
-	public void setTestObject(Object testObject) {
-		this.testObject = testObject;
-	}
+   public void setTestObject(Object testObject)
+   {
+      this.testObject = testObject;
+   }
 
-	public void setCustomConfigMethod(Method customConfigMethod) {
-		this.customConfigMethod = customConfigMethod;
-	}
-
-
-	// @Override
-	// protected void postProcessConfiguration(Configuration config) throws HibernateException {
-	// 	if (customConfigMethod != null) {
-	// 		try {
-	// 			ReflectionUtils.invokeMethod(testObject, customConfigMethod, config);
-	// 		} catch (InvocationTargetException e) {
-	// 			throw new UnitilsException("Error while invoking custom config method", e.getCause());
-	// 		}
-	// 	}
-	// }
+   public void setCustomConfigMethod(Method customConfigMethod)
+   {
+      throw new UnsupportedOperationException();
+   }
 }

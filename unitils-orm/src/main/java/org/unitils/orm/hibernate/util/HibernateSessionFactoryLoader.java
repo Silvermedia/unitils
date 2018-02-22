@@ -55,7 +55,6 @@ public class HibernateSessionFactoryLoader implements OrmPersistenceUnitLoader<S
         // A custom subclass of spring's LocalSessionFactoryBean is used, to enable calling a custom config method
         UnitilsLocalSessionFactoryBean factoryBean = new UnitilsLocalSessionFactoryBean();
         factoryBean.setDataSource(getDataSource());
-        //factoryBean.setConfigurationClass(getConfigurationObjectClass());
         Resource[] hibernateConfigFiles = new Resource[entityManagerConfig.getConfigFiles().size()];
         int index = 0;
         for (String configFileName : entityManagerConfig.getConfigFiles()) {
