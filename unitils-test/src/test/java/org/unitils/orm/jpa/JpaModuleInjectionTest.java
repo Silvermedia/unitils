@@ -24,6 +24,7 @@ import java.util.Properties;
 import javax.persistence.EntityManagerFactory;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.unitils.core.ConfigurationLoader;
@@ -35,6 +36,7 @@ import org.unitils.orm.jpa.annotation.JpaEntityManagerFactory;
  * @author Tim Ducheyne
  * @author Filip Neven
  */
+@Ignore
 public class JpaModuleInjectionTest {
 
 	/* Tested object */

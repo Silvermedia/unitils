@@ -8,6 +8,7 @@ import org.easymock.EasyMock;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.BeansException;
@@ -22,7 +23,6 @@ import org.unitils.UnitilsJUnit4TestClassRunner;
 import org.unitils.core.ConfigurationLoader;
 import org.unitils.core.Unitils;
 import org.unitils.core.UnitilsException;
-import org.unitils.database.DatabaseModule;
 import org.unitils.easymock.EasyMockUnitils;
 import org.unitils.easymock.annotation.Mock;
 import org.unitils.inject.annotation.TestedObject;
@@ -41,6 +41,7 @@ import org.unitils.spring.annotation.SpringApplicationContext;
  * @since 3.4
  * 
  */
+@Ignore
 @RunWith(UnitilsJUnit4TestClassRunner.class)
 public class ProfileModuleTest {
 

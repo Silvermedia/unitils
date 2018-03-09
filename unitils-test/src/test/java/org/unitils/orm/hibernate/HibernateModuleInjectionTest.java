@@ -24,6 +24,7 @@ import java.util.Properties;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.unitils.UnitilsJUnit4;
 import org.unitils.core.ConfigurationLoader;
@@ -35,6 +36,7 @@ import org.unitils.orm.hibernate.annotation.HibernateSessionFactory;
  * @author Tim Ducheyne
  * @author Filip Neven
  */
+@Ignore
 public class HibernateModuleInjectionTest extends UnitilsJUnit4 {
 
     /* Tested object */

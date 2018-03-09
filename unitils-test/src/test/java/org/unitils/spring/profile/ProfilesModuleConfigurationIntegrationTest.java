@@ -5,6 +5,7 @@ import javax.sql.DataSource;
 
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import org.unitils.spring.annotation.ConfigureProfile;
  * @since 3.4
  * 
  */
+@Ignore
 @RunWith(UnitilsJUnit4TestClassRunner.class)
 @ConfigureProfile(value = "dev", configuration = TypeConfiguration.CONFIGURATION, packageProfile = "org.unitils.spring.profile")
 public class ProfilesModuleConfigurationIntegrationTest {

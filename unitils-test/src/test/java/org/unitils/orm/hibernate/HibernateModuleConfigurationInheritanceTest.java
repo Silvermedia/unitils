@@ -25,8 +25,8 @@ import java.util.Properties;
 
 import org.hibernate.cfg.Configuration;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
-import org.unitils.orm.hibernate.HibernateModule;
 import org.unitils.orm.hibernate.annotation.HibernateSessionFactory;
 
 /**
@@ -35,6 +35,7 @@ import org.unitils.orm.hibernate.annotation.HibernateSessionFactory;
  * @author Tim Ducheyne
  * @author Filip Neven
  */
+@Ignore
 public class HibernateModuleConfigurationInheritanceTest {
 
 	HibernateModule hibernateModule;

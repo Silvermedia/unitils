@@ -5,10 +5,11 @@ import java.io.IOException;
 import java.util.Properties;
 
 import javax.sql.DataSource;
-import org.junit.AfterClass;
 
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.unitils.UnitilsJUnit4TestClassRunner;
@@ -33,6 +34,7 @@ import org.unitils.dbunit.annotation.ExpectedDataSets;
  * @since 3.4.1
  *
  */
+@Ignore
 @RunWith(UnitilsJUnit4TestClassRunner.class)
 public class MultiDatabaseIntTest {
     private static final String DATABASE2 = "database2";
